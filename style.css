@@ -1,0 +1,1008 @@
+html,
+body {
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 1em;
+  overflow: hidden; /* Garante que o conteúdo da página não role */
+  text-align: center;
+  height: 100%; /* Define altura para ocupar toda a tela */
+  margin: 0;
+}
+
+#calendar-container {
+  position: fixed; /* Mantém o contêiner fixo na tela */
+  top: 7vw;
+  left: 0;
+  width: 99.4vw;
+  height: 87vh; /* Ajusta o contêiner para ocupar 93% da altura da tela */
+  overflow: visible; /* Deixe o calendário ocupar o espaço necessário */
+}
+
+#calendar {
+  position: relative;
+  width: 100%;
+  height: 100%; /*690px;  Faz com que o calendário ocupe a altura do contêiner */
+  overflow-y: auto; /* Permite a rolagem vertical */
+}
+
+.calendar-button {
+  margin-bottom: 1vw; /* Espaçamento entre os botões */
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  height: 10vh;
+}
+.profile img {
+  position: fixed;
+  border-radius: 50%;
+  width: 2.5vw;
+  height: 5vh;
+  margin-left: 1vw;
+  margin-top: -2vh;
+}
+
+.nome {
+  position: fixed;
+  color: rgb(0, 0, 0);
+  margin-top: -3vh;
+  margin-left: 4vw;
+}
+
+.barra-vertical {
+  width: 99.4vw; /* Largura da barra */
+  height: 1.8vw; /* Altura da barra */
+  background-color: rgb(187, 203, 251); /* Cor da barra */
+  margin: 0 auto; /* Centraliza horizontalmente */
+  position: fixed; /* Define o posicionamento relativo */
+  top: 7vw; /* Move a barra para baixo */
+  left: 0vw;
+  /* Bordas arredondadas apenas nas bordas superiores */
+  border-top-left-radius: 1vw; /* Raio de arredondamento da borda superior esquerda */
+  border-top-right-radius: 1vw; /* Raio de arredondamento da borda superior direita */
+  display: flex; /* Usando flexbox para centralizar o texto */
+  align-items: center; /* Centraliza verticalmente o texto */
+  justify-content: center; /* Centraliza horizontalmente o texto */
+  color: rgb(0, 0, 0); /* Cor do texto */
+  font-size: 1em; /* Tamanho da fonte */
+  font-family: "Roboto", sans-serif;
+  font-weight: 800; /* Deixa o texto em negrito */
+}
+
+/*Move a grid para cima*/
+.fc-scrollgrid,
+.fc-scrollgrid-liquid {
+  margin-top: -2.3vh;
+}
+
+/* Alinha o número do dia à esquerda */
+.fc-daygrid-day-number {
+  text-align: left !important; /* Alinha o texto à esquerda */
+  padding-left: 1vw; /* Ajusta o espaçamento à esquerda, se necessário */
+  width: 100%; /* Garante que o espaço disponível seja utilizado */
+}
+
+/* Oculta os horários dos eventos na visualização mensal */
+.fc-daygrid-event-time {
+  display: none !important;
+}
+
+/* Remove o fundo amarelo do dia atual */
+.fc-day-today,
+.fc-col-header-cell.fc-day-today {
+  background-color: transparent !important; /* Define o fundo como transparente */
+}
+
+/* Nome do dia (ex: "SEX") */
+.fc-day-name {
+  color: #333;
+  font-weight: normal;
+}
+
+/* Número do dia (ex: "15") */
+.fc-day-number {
+  background-color: rgb(0, 54, 138);
+  color: white;
+  padding: 1vw 1vw;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.fc-header-toolbar {
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.fc-header-toolbar {
+  font-size: 1em; /* Aumenta o tamanho da fonte */
+  padding: 1.1vh; /* Ajusta o espaçamento interno para aumentar a altura */
+}
+
+.fc-col-header-cell, /* Cabeçalho das colunas (dias da semana) */
+.fc-timegrid-col {
+  /* Colunas de tempo (horas) na visualização de semana/dia */
+  height: 5vh;
+  line-height: 5vh;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase; /* Capitaliza a primeira letra de cada palavra */
+  color: #777676;
+}
+
+/* Ajusta o Titulo Com a Semana Atual, Mês e Ano (01 - 05 de Nov. de 2024)*/
+.fc-toolbar-title {
+  position: relative; /* Habilita o posicionamento relativo */
+  top: -4.2vw; /* Ajuste este valor para mover para cima ou para baixo */
+  right: -13vw; /* Ajuste este valor conforme necessário */
+  text-align: center; /* Centraliza o título */
+  margin: 0; /* Remove margens se necessário */
+  padding: 0; /* Remove padding, se necessário */
+  font-size: 1.3em !important; /* Força a redução do tamanho da fonte */
+  text-transform: capitalize;
+}
+
+/* Se necessário, ajuste a barra de ferramentas para manter a estrutura */
+.fc-toolbar {
+  display: flex; /* Usa flexbox para alinhar os itens */
+  justify-content: space-between; /* Distribui os itens no espaço disponível */
+}
+
+.fc-toolbar-title {
+  flex-grow: 1; /* Faz o título ocupar o espaço restante */
+  text-align: center; /* Centraliza o título dentro do espaço */
+}
+
+/* Ocultar o título na visualização mensal*/
+.fc-toolbar-title {
+  display: none !important;
+}
+
+.fc-event {
+  color: #000;
+  /*font-size: ; /* Mantém o tamanho da fonte menor */
+  white-space: normal; /* Permite quebra de linha */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Trunca o texto com "..." se for muito longo */
+  display: flex; /* Flexbox para o alinhamento */
+  align-items: flex-start; /* Alinha o conteúdo no topo */
+  line-height: 1.2; /* Reduz o espaçamento entre as linhas */
+  padding: 2px; /* Pequeno padding para melhorar legibilidade */
+  word-wrap: break-word; /* Permite que palavras longas sejam quebradas */
+  height: auto; /* Altura ajustável com base no conteúdo */
+  opacity: 0.7; /* Define a transparência (0 é totalmente transparente, 1 é totalmente opaco) */
+}
+
+.fc-event-time {
+  display: block;
+  white-space: normal;
+  text-align: left;
+  padding-left: -1vw;
+  padding-right: -1vw;
+}
+
+.fc-event-title {
+  display: block;
+  white-space: normal;
+  text-align: left;
+  padding-left: -1vw;
+  padding-right: -1vw;
+}
+
+.fc-listWeek-view {
+  margin-top: -2.5vh;
+}
+
+#nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Espaço entre os botões */
+  margin-bottom: 1.1vh; /* Distância dos botões para o calendário */
+}
+/* ============================================== Botões do Topo =============================================================*/
+.Retornar-calendar {
+  position: fixed; /* Fixa o botão na tela mesmo ao rolar */
+  top: 6vh; /* Define a distância fixa do topo */
+  left: 0.7vw; /* Define a distância fixa da esquerda */
+  background-color: rgb(109, 178, 62);
+  border: none;
+  width: 2.8vw;
+  height: 4.5vh;
+  cursor: pointer;
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("img/Retornar_calendario.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Avancar-calendar {
+  position: fixed; /* Fixa o botão na tela mesmo ao rolar */
+  top: 6vh; /* Distância do topo */
+  left: 4vw; /* Distância da esquerda */
+  background-color: rgb(109, 178, 62);
+  border: none;
+  width: 2.8vw;
+  height: 4.5vh;
+  cursor: pointer;
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("img/Avancar_calendario.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Hoje-calendar {
+  position: fixed; /* Fixa o botão na tela mesmo ao rolar */
+  top: 6vh; /* Distância do topo */
+  left: 7.2vw; /* Distância da esquerda */
+  background-color: rgb(28, 85, 170);
+  border: none;
+  width: 7vw;
+  height: 4.5vh;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: medium;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease; /* Transição suave de 0.3 segundos */
+  color: white;
+}
+
+/* Estilo ao passar o mouse */
+.Hoje-calendar:hover {
+  background-color: rgb(38, 100, 210); /* Cor mais clara ao passar o mouse */
+}
+
+.Hoje-calendar:hover {
+  background: rgba(25, 81, 167, 0.8); /* Aplica o branco transparente no lugar do gradient */
+}
+
+/*Estilização do botão Mês do calendario*/
+.Mes-calendar {
+  position: fixed; /* Posição absoluta em relação ao contêiner */
+  top: 6vh; /* Ajuste conforme necessário */
+  right: 25vw; /* Ajuste conforme necessário */
+  background-color: rgb(28, 85, 170);
+  border: none;
+  width: 8.5vw;
+  height: 4.5vh;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: medium;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0s ease; /* Transição suave de 0.3 segundos */
+  /* Aplica border-radius apenas no lado esquerdo */
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  color: white;
+  z-index: 9999;
+}
+
+.Mes-calendar:hover {
+  background: rgba(25, 81, 167, 0.8); /* Aplica o branco transparente no lugar do gradient */
+}
+
+/*Estilização do botão Semana do calendario*/
+.Semana-calendar {
+  position: fixed; /* Posição absoluta em relação ao contêiner */
+  top: 6vh; /* Ajuste conforme necessário */
+  right: 17vw; /* Ajuste conforme necessário */
+  background-color: rgb(28, 85, 170);
+  border: none;
+  width: 8.5vw;
+  height: 4.5vh;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: medium;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0s ease; /* Transição suave de 0.3 segundos */
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  color: white;
+  z-index: 9999;
+}
+
+.Semana-calendar:hover {
+  background: rgba(25, 81, 167, 0.8); /* Aplica o branco transparente no lugar do gradient */
+}
+
+/*Estilização do botão Dia do calendario*/
+.Dia-calendar {
+  position: fixed; /* Posição absoluta em relação ao contêiner */
+  top: 6vh; /* Ajuste conforme necessário */
+  right: 9vw; /* Ajuste conforme necessário */
+  /*background: linear-gradient(to right, rgb(64, 114, 206), rgb(25, 81, 167));*/
+  background-color: rgb(28, 85, 170);
+  border: none;
+  width: 8.5vw;
+  height: 4.5vh;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: medium;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0s ease; /* Transição suave de 0.3 segundos */
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  color: white;
+  z-index: 9999;
+}
+
+.Dia-calendar:hover {
+  background: rgba(25, 81, 167, 0.8); /* Aplica o branco transparente no lugar do gradient */
+}
+
+/*Estilização do botão Lista do calendario*/
+.Lista-calendar {
+  position: fixed; /* Posição absoluta em relação ao contêiner */
+  top: 6vh; /* Ajuste conforme necessário */
+  right: 0.8vw; /* Ajuste conforme necessário */
+  /*background: linear-gradient(to right, rgb(64, 114, 206), rgb(25, 81, 167));*/
+  background-color: rgb(28, 85, 170);
+  border: none;
+  width: 8.5vw;
+  height: 4.5vh;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: medium;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0s ease; /* Transição suave de 0.3 segundos */
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: white;
+  z-index: 9999;
+}
+
+.Lista-calendar:hover {
+  background: rgba(25, 81, 167, 0.8); /* Aplica o branco transparente no lugar do gradient */
+}
+
+/*Estilização do botão Lista do calendario*/
+.Config-calendar {
+  position: fixed; /* Posição absoluta em relação ao contêiner */
+  top: 1vh; /* Ajuste conforme necessário */
+  right: 0.8vw; /* Ajuste conforme necessário */
+  /*background: linear-gradient(to right, rgb(64, 114, 206), rgb(25, 81, 167));*/
+  background-color: transparent;
+  border: none;
+  width: 2vw;
+  height: 4vh;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: medium;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0s ease; /* Transição suave de 0.3 segundos */
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: white;
+  background-image: url("img/Objects.png"); /* Imagem de fundo */
+  background-size: cover; /* Ajusta a imagem para cobrir todo o botão */
+  background-repeat: no-repeat; /* Não repetir a imagem */
+  background-position: center; /* Centraliza a imagem */
+  z-index: 9999;
+}
+
+/* ==================== Fim da Region dos Botões do Topo =======================*/
+/*==============================================================================*/
+
+/*---------------------------------------------------------Estilo da Lista dos Eventos--------------------------------------------------------------/*
+/* Estilo para o plano de fundo de cada dia da semana */
+.fc-list-day .fc-list-day-cushion {
+  background-color: #e8f0f3 !important; /* Cor de fundo do cabeçalho */
+  padding: 1vw; /* Espaçamento interno */
+  /*border-radius: 8px; /* Arredondamento dos cantos */
+  text-align: center; /* Centraliza o texto */
+}
+
+/* Mantém o estilo do texto */
+.fc-list-day-text,
+.fc-list-day-side-text {
+  color: #757575; /* Cor do texto */
+  text-transform: capitalize; /* Primeira letra de cada palavra em maiúscula */
+}
+
+/* Estilo para o título do evento */
+.fc-list-event-title {
+  border: none !important; /* Remove todas as bordas */
+  background-color: transparent !important; /* Define o fundo como transparente */
+  font-size: 1.2em; /* Aumenta o tamanho da fonte do título */
+  font-weight: bold; /* Deixa o título em negrito */
+  color: #757575; /* Cor do texto */
+  margin-left: 1vw; /* Espaçamento à esquerda */
+}
+
+/* Estilo geral para a célula do evento */
+.fc-list-event {
+  background-color: transparent; /* Fundo transparente */
+  border: none; /* Remove outras bordas */
+  position: relative; /* Define posição relativa para adicionar um pseudo-elemento */
+  display: flex; /* Usa Flexbox para alinhar os elementos */
+  flex-direction: row; /* Alinha os elementos em linha */
+  align-items: center; /* Alinha verticalmente no centro */
+  padding-left: 1vw; /* Adiciona espaçamento para o conteúdo */
+}
+
+/* Estilo para o horário do evento */
+.fc-list-event-time {
+  font-size: 1em; /* Tamanho da fonte do horário */
+  color: #666; /* Cor mais clara para diferenciar do título */
+  font-style: normal; /* Estilo itálico para o horário */
+  padding: 10vw; /* Preenchimento interno para adicionar espaço */
+  border-radius: 4px; /* Arredondar os cantos */
+  border: none !important; /* Remove a borda do painel */
+  background-color: transparent !important; /* Define o fundo como transparente */
+  margin-left: 5px; /* Espaço à esquerda do horário (opcional) */
+}
+
+/* Estilo para o gráfico do evento */
+.fc-list-event-graphic {
+  border: none !important; /* Remove a borda do painel */
+  background-color: transparent !important; /* Define o fundo como transparente */
+  margin-left: 5vw;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+.modal-content {
+  background: white;
+  width: 25%;
+  height: 80vh;
+  margin: 10% auto;
+  margin-top: 10vh;
+  padding: 20px;
+  /* Borda preta */
+  border: 1px solid black; /* Espessura da borda e cor preta */
+  /* Se você quiser bordas arredondadas */
+  border-radius: 8px;
+  /* Sombreamento para dar efeito de profundidade */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+.close {
+  float: right;
+  cursor: pointer;
+}
+input,
+select {
+  width: 90%;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 1.1em;
+  border: 1px solid #ccc; /* Borda fina, cor cinza claro */
+}
+
+textarea {
+  width: 90%;
+  height: 20vh;
+  margin: 10px 0;
+  padding: 8px;
+  margin-top: 30px;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+
+/* Estilizando o botão "Guardar" */
+#save {
+  position: relative;
+  background: #4ca2ff; /* Verde */
+  color: white;
+  left: 9vw;
+  width: 7vw;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1rem;
+  transition: background 0.3s ease-in-out;
+}
+
+#save:hover {
+  background: #4ca3ffd5;
+}
+
+#save:active {
+  background: #4ca3ffd5;
+}
+
+/* Estilizando o botão "Editar" */
+#editar {
+  position: relative;
+  background: #4ca2ff; /* Laranja */
+  color: white;
+  left: 5vw;
+  width: 7vw;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1rem;
+  transition: background 0.3s ease-in-out;
+}
+
+#editar:hover {
+  background: #4ca3ffd5;
+}
+
+#editar:active {
+  background: #4ca3ffd5;
+}
+
+/* Estilizando o botão "Editar" */
+#remover {
+  position: relative;
+  background: #fa0303; /* Laranja */
+  color: white;
+  left: 13vw;
+  width: 7vw;
+  top: -4vh;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1rem;
+  transition: background 0.3s ease-in-out;
+}
+
+#remover:hover {
+  background: #ff4c4cd5;
+}
+
+#remover:active {
+  background: #ff4c4cd5;
+}
+
+label {
+  position: relative; /* Permite ajustar a posição apenas da label */
+  margin-right: auto; /* Zera o impacto no fluxo do layout */
+  left: 0px; /* Move a label para a esquerda */
+  top: -5px;
+  font-weight: bold;
+}
+
+#event-color {
+  position: fixed;
+  display: inline-block; /* Garante que o seletor de cor não ocupe 100% da largura */
+  margin-top: -10px; /* Espaçamento superior para afastar do rótulo */
+  margin-left: 5px;
+  border: none; /* Remove bordas padrão */
+  border-radius: 300px; /* Torna o seletor redondo */
+  width: 30px; /* Define a largura */
+  height: 30px; /* Define a altura igual à largura */
+  padding: 0; /* Remove espaçamento interno */
+  cursor: pointer; /* Muda o cursor para indicar interatividade */
+  overflow: hidden; /* Garante que o conteúdo interno siga o formato arredondado */
+}
+
+/* =======================================MODAL CONFIGURAÇÔES=============================================*/
+.modalconfig {
+  display: none;
+  position: fixed;
+  top: -10vh;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+.modalconfig-content {
+  background: white;
+  width: 25%;
+  height: 40vh;
+  margin: 10% auto;
+  padding: 20px;
+  /* Borda preta */
+  border: 1px solid black; /* Espessura da borda e cor preta */
+  /* Se você quiser bordas arredondadas */
+  border-radius: 8px;
+  /* Sombreamento para dar efeito de profundidade */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+.close {
+  float: right;
+  cursor: pointer;
+}
+input,
+select {
+  width: 90%;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 1.1em;
+  border: 1px solid #ccc; /* Borda fina, cor cinza claro */
+}
+
+/* Estilizando o botão "Guardar" */
+#saveConfig {
+  position: relative;
+  background: #4ca2ff; /* Verde */
+  color: white;
+  left: 9vw;
+  width: 7vw;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1rem;
+  transition: background 0.3s ease-in-out;
+}
+
+#saveConfig:hover {
+  background: #4ca3ffd5;
+}
+
+#save:active {
+  background: #4ca3ffd5;
+}
+
+/* Ajustes gerais para telas menores */
+@media screen and (max-width: 768px) and (max-height: 1600px) {
+  html,
+  body {
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+    overflow: hidden; /* Garante que o conteúdo da página não role */
+    text-align: center;
+    height: 100%; /* Define altura para ocupar toda a tela */
+    margin: 0;
+  }
+
+  #calendar-container {
+    position: fixed; /* Mantém o contêiner fixo na tela */
+    top: 15.2vw;
+    left: 0;
+    width: 99.4vw;
+    height: 87vh; /* Ajusta o contêiner para ocupar 93% da altura da tela */
+    overflow: visible; /* Deixe o calendário ocupar o espaço necessário */
+  }
+
+  #calendar {
+    position: relative;
+    width: 100%;
+    height: 100%; /*690px;  Faz com que o calendário ocupe a altura do contêiner */
+    overflow-y: auto; /* Permite a rolagem vertical */
+  }
+
+  .barra-vertical {
+    width: 100vw; /* Faz a barra ocupar toda a largura */
+    height: 3.5vh; /* Ajusta a altura */
+    font-size: 0.9em; /* Reduz o tamanho da fonte */
+    top: 8.1vh !important;
+  }
+
+  /* Ajustando os botões para melhor encaixe em mobile */
+  #nav-buttons {
+    flex-direction: column; /* Empilha os botões em telas pequenas */
+    align-items: center;
+    gap: 5px; /* Reduz o espaçamento */
+  }
+
+  .calendar-button {
+    width: 80%; /* Faz os botões ocuparem mais espaço na tela */
+    height: 40px; /* Aumenta um pouco a altura */
+    font-size: 1em; /* Ajusta o tamanho da fonte */
+  }
+
+  .Retornar-calendar,
+  .Avancar-calendar,
+  .Hoje-calendar {
+    width: 30px; /* Reduz um pouco mais os botões */
+    height: 30px;
+    font-size: 0.7em; /* Ajuste fino da fonte */
+  }
+
+  /* Ajusta os espaçamentos para telas pequenas */
+  .Retornar-calendar {
+    left: 5px;
+    top: 20px;
+  }
+  .Avancar-calendar {
+    left: 40px;
+    top: 20px;
+  }
+  .Hoje-calendar {
+    left: 75px;
+    top: 20px;
+  }
+
+  .Mes-calendar,
+  .Semana-calendar,
+  .Dia-calendar,
+  .Lista-calendar {
+    width: 50px; /* Reduz um pouco mais os botões */
+    height: 30px;
+    font-size: 0.8em; /* Ajuste fino da fonte */
+    top: 20px;
+  }
+
+  .Mes-calendar {
+    right: 150px;
+  }
+  .Semana-calendar {
+    right: 105px;
+  }
+  .Dia-calendar {
+    right: 60px;
+  }
+  .Lista-calendar {
+    right: 15px;
+  }
+
+  .modal {
+    top: 5vh;
+  }
+
+  .modal-content {
+    width: 70%; /* Aumenta a largura do modal em telas menores */
+    height: 70vh;
+    margin: 15% auto; /* Centraliza o modal de forma responsiva */
+    padding: 15px; /* Reduz o padding para melhor adaptação */
+  }
+
+  input,
+  select {
+    font-size: 0.9em; /* Ajuste fino do tamanho da fonte */
+    padding: 8px; /* Reduz o padding para telas pequenas */
+  }
+
+  textarea {
+    height: 17vh;
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  /* Estilizando o botão "Guardar" */
+  #save {
+    position: relative;
+    background: #4ca2ff; /* Verde */
+    color: white;
+    left: 24.5vw;
+    width: 23vw;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+  }
+
+  #save:hover {
+    background: #4ca3ffd5;
+  }
+
+  #save:active {
+    background: #4ca3ffd5;
+  }
+
+  /* Estilizando o botão "Editar" */
+  #editar {
+    position: relative;
+    background: #4ca2ff; /* Laranja */
+    color: white;
+    left: 13vw;
+    width: 21.5vw;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+  }
+
+  #editar:hover {
+    background: #4ca3ffd5;
+  }
+
+  #editar:active {
+    background: #4ca3ffd5;
+  }
+
+  #remover {
+    position: relative;
+    background: #fa0303; /* Laranja */
+    color: white;
+    left: 36vw;
+    width: 21.5vw;
+    top: -5.4vh;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+  }
+
+  #editar:hover {
+    background: #ff4c4cd5;
+  }
+
+  #editar:active {
+    background: #ff4c4cd5;
+  }
+
+  label {
+    font-size: 1em; /* Reduz o tamanho da fonte da label */
+  }
+}
+
+/* Ajustes para telas em modo paisagem */
+@media screen and (orientation: landscape) and (max-width: 1600px) {
+  html,
+  body {
+    font-size: 12px; /* Ajusta a fonte para telas em modo paisagem */
+  }
+
+  #calendar-container {
+    top: 15vh; /* Ajusta o top para melhor adaptação */
+    width: 99.2vw; /* Ajusta o tamanho do calendário */
+    height: 70vh;
+  }
+
+  .barra-vertical {
+    height: 3vh;
+    font-size: 0.8em;
+    top: 20.8vh !important;
+  }
+
+  #nav-buttons {
+    flex-direction: row; /* Alinha os botões horizontalmente em modo paisagem */
+    justify-content: space-around;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .calendar-button {
+    width: 30%;
+    height: 40px;
+    font-size: 1em;
+  }
+
+  .Hoje-calendar {
+    width: 60px;
+    height: 35px;
+    font-size: 0.8em;
+    margin-left: 30px;
+  }
+
+  .Retornar-calendar {
+    width: 35px;
+    height: 35px;
+    font-size: 0.8em;
+  }
+
+  .Avancar-calendar {
+    width: 35px;
+    height: 35px;
+    font-size: 0.8em;
+    margin-left: 15px;
+  }
+
+  .Mes-calendar {
+    width: 70px;
+    height: 35px;
+    font-size: 0.8em;
+    margin-right: 40px;
+  }
+
+  .Semana-calendar {
+    width: 70px;
+    height: 35px;
+    font-size: 0.8em;
+    margin-right: 20px;
+  }
+
+  .Dia-calendar {
+    width: 70px;
+    height: 35px;
+    font-size: 0.8em;
+  }
+
+  .Lista-calendar {
+    width: 70px;
+    height: 35px;
+    font-size: 0.8em;
+  }
+
+  .Mes-calendar {
+    right: 140px;
+  }
+  .Semana-calendar {
+    right: 95px;
+  }
+  .Dia-calendar {
+    right: 50px;
+  }
+  .Lista-calendar {
+    right: 5px;
+  }
+
+  .modal-content {
+    width: 60%;
+    height: 60vh;
+    margin: 10% auto;
+  }
+
+  input,
+  select {
+    font-size: 0.8em;
+    padding: 6px;
+  }
+
+  textarea {
+    height: 15vh;
+    font-size: 0.8em;
+    padding: 6px;
+  }
+
+  #save,
+  #editar,
+  #remover {
+    width: 18vw;
+    font-size: 0.9rem;
+  }
+
+  #save,
+  #editar {
+    padding: 8px 12px;
+  }
+
+  #remover {
+    background: #e63946; /* Um tom mais escuro de vermelho */
+  }
+}

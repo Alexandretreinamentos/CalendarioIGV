@@ -1,0 +1,151 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("img/11545792-linhas-brilhantes.jpg"); /* Substitua pelo caminho da sua imagem */
+  background-size: cover; /* Faz a imagem cobrir todo o fundo */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Impede a repetição da imagem */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 33vh;
+  height: 31vh;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  /* Adicione o select aqui */
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+
+.form-group button {
+  width: 100%;
+  padding: 10px;
+  background-color: #01487e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2vh;
+}
+
+.form-group button:hover {
+  background-color: #036cbd;
+}
+
+.new-registo {
+  width: 40%;
+  padding: 10px;
+  background-color: #fdfdfd;
+  color: rgb(2, 2, 2);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5vw;
+}
+
+/* Estilo ao passar o mouse */
+.new-registo:hover {
+  background-color: #01487e; /* Cor mais clara ao passar o mouse */
+  color: white;
+}
+
+.erro-input {
+  border: 2px solid #e74c3c;
+  background-color: #fdecea;
+}
+
+.form-group-lembrar {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* espaço entre o checkbox e o texto */
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-group-lembrar label {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none; /* Suporte para Safari e iOS */
+  -ms-user-select: none; /* Suporte antigo para IE/Edge */
+}
+
+.esqueci-senha {
+  background: none;
+  border: none;
+  color: #01487e;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-top: -2vh;
+}
+
+.swal2-container.swal2-backdrop-show {
+  background-color: rgba(20, 20, 20, 0.9) !important;
+}
+
+.swal2-shown .swal2-height-auto {
+  background-color: #021967;
+}
+
+/* ======================================================================================================= */
+/* Responsividade para celulares */
+@media (max-width: 480px) {
+  .container {
+    width: 80vw;
+    height: auto;
+    padding: 20px;
+  }
+
+  .form-group button {
+    font-size: 16px;
+  }
+
+  .new-registo {
+    font-size: 16px;
+    margin-left: 24vw;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .form-group-lembrar {
+    flex-direction: row;
+    justify-content: start;
+    font-size: 12px;
+  }
+
+  .esqueci-senha {
+    font-size: 13px;
+    text-align: left;
+    display: block;
+    margin-top: 5px;
+  }
+}

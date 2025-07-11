@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const user = sessionStorage.getItem("user");
   let corEvento; // variável global
- //teste
+
   const apiSalvarEventos = "https://inserireventos.alexandre-treinamentos.workers.dev/";
   const apiRestaurarEventos = "https://restaurareventos.alexandre-treinamentos.workers.dev/";
   const apiUpdate = "https://updateeventos.alexandre-treinamentos.workers.dev/";
